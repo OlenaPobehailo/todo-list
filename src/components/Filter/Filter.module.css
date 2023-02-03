@@ -1,0 +1,9 @@
+.buttonGroup {
+    display: flex;
+    justify-content: flex-end;
+    width: auto;
+}
+
+.filterButton {
+    min-width: 100px;
+}

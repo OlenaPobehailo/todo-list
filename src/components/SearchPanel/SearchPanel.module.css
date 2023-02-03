@@ -1,0 +1,6 @@
+.searchInput {
+    width: auto;
+    height: 38px;
+    flex-grow: 1;
+    margin-right: 3px;
+}
