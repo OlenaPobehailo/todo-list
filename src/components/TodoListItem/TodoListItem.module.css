@@ -1,7 +1,4 @@
-.todoListItem {
-
-
-}
+.todoListItem {}
 
 .todoListItemButton {
   width: 80px;
@@ -10,16 +7,19 @@
 }
 
 .todoListItemLabel {
-  margin-left: 1.25rem;
+  padding: 10px 0 10px 20px;
   line-height: 35px;
   cursor: pointer;
+  flex-grow: 1;
 }
 
-.todoListItemDone .todoListItemLabel {
+.todoListItemLabelDone {
+  composes: todoListItemLabel;
   text-decoration: line-through;
 }
 
-.todoListItemImportant .todoListItemLabel {
+.todoListItemLabelImportant {
+  composes: todoListItemLabel;
   font-weight: bold;
   color: steelblue;
 }
