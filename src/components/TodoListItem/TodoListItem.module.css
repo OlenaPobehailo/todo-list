@@ -13,7 +13,7 @@
   flex-grow: 1;
 }
 
-.todoListItemLabelDone {
+.todoListItemLabelCompleted {
   composes: todoListItemLabel;
   text-decoration: line-through;
 }

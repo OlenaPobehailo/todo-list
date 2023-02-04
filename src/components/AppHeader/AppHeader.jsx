@@ -1,10 +1,10 @@
 import css from './AppHeader.module.css';
-const AppHeader = ({ todo, done }) => {
+const AppHeader = ({ todo, completed }) => {
   return (
     <div className={css.appHeader}>
       <h1>Todo List</h1>
       <h2>
-        {todo} to do, {done} done
+        {todo} to do, {completed} completed
       </h2>
     </div>
   );

@@ -12,7 +12,7 @@ export default class Filter extends Component {
           Active
         </button>
         <button type="button" className={css.filterButton}>
-          Done
+          Completed
         </button>
       </div>
     );
