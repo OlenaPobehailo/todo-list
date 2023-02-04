@@ -1,7 +1,7 @@
 import TodoListItem from '../TodoListItem/TodoListItem';
 import css from './TodoList.module.css';
 
-const TodoList = ({ todos }) => {
+const TodoList = ({ todos, onDelete }) => {
   return (
     <ul>
       {todos.map(item => {
@@ -9,7 +9,7 @@ const TodoList = ({ todos }) => {
 
         return (
           <li key={id} className={css.listItem}>
-            <TodoListItem {...restProps} />
+            <TodoListItem {...restProps} onDelete={() => onDelete(id)} />
           </li>
         );
       })}
