@@ -3,7 +3,7 @@
 .todoListItemButton {
   width: 80px;
   height: 50px;
-  margin: 3px;
+  margin-left: 3px;
 }
 
 .todoListItemLabel {
@@ -21,5 +21,5 @@
 .todoListItemLabelImportant {
   composes: todoListItemLabel;
   font-weight: bold;
-  color: steelblue;
+  color: tomato;
 }

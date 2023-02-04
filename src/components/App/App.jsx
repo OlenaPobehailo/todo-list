@@ -10,9 +10,9 @@ import AddItemForm from '../AddItemForm';
 export default class App extends Component {
   state = {
     todoData: [
-      this.createItem('Drink Tea'),
       this.createItem('Learn React'),
       this.createItem('Create App'),
+      this.createItem('Find Job'),
     ],
   };
 
