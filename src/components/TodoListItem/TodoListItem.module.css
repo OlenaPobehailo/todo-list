@@ -6,20 +6,21 @@
   margin-left: 3px;
 }
 
-.todoListItemLabel {
+.todoListItemTask {
   padding: 10px 0 10px 20px;
   line-height: 35px;
   cursor: pointer;
   flex-grow: 1;
+  user-select: none;
 }
 
-.todoListItemLabelCompleted {
-  composes: todoListItemLabel;
+.todoListItemTaskCompleted {
+  composes: todoListItemTask;
   text-decoration: line-through;
 }
 
-.todoListItemLabelImportant {
-  composes: todoListItemLabel;
+.todoListItemTaskImportant {
+  composes: todoListItemTask;
   font-weight: bold;
   color: tomato;
 }
