@@ -10,11 +10,7 @@ import css from './App.module.css';
 
 export default class App extends Component {
   state = {
-    todoData: [
-      this.createItem('Learn React'),
-      this.createItem('Create App'),
-      this.createItem('Find Job'),
-    ],
+    todoData: [this.createItem('Find '), this.createItem('Learn '), this.createItem('Create ')],
 
     query: '',
     status: 'all', // all, active, completed
