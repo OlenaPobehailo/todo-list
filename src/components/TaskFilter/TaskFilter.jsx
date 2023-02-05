@@ -37,4 +37,5 @@ const TaskFilter = ({ status, handleFilterChange }) => {
     </div>
   );
 };
+
 export default TaskFilter;

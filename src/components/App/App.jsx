@@ -20,6 +20,27 @@ export default class App extends Component {
     status: 'all', // all, active, completed
   };
 
+  componentDidMount() {
+    console.log('componentDidMount');
+
+    const todoData = localStorage.getItem('todoData');
+    const parsedTodoData = JSON.parse(todoData);
+
+    if (parsedTodoData) {
+      this.setState({ todoData: parsedTodoData });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // console.log('componentDidUpdate');
+    // console.log(prevState);
+    // console.log(this.state);
+
+    if (this.state.todoData !== prevState.todoData) {
+      localStorage.setItem('todoData', JSON.stringify(this.state.todoData));
+    }
+  }
+
   createItem(task) {
     return { task, important: false, completed: false, id: nanoid() };
   }

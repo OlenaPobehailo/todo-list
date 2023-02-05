@@ -4,9 +4,9 @@
     margin-bottom: 10px;
 }
 
-.addItemForm button {
+.addItemForm button { 
     display: inline-block;
-    width: 80px;
+    width: 120px;
     height: 46px;
     margin-left: 2px;
     font-size: 18px;
