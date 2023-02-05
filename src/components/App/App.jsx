@@ -102,6 +102,7 @@ export default class App extends Component {
     return (
       <div className="todo-app">
         <AppHeader todo={todoQuantity} completed={completedQuantity} />
+        
         <div className="top-panel">
           <SearchPanel onSearchChange={this.handleSearch} />
           <TaskFilter status={this.state.status} handleFilterChange={this.handleFilterChange} />

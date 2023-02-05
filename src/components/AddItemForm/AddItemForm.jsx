@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import css from './AddItemForm.module.css';
-
+import PropTypes from 'prop-types';
 export default class AddItemForm extends Component {
   state = {
     task: '',
@@ -35,3 +35,7 @@ export default class AddItemForm extends Component {
     );
   }
 }
+
+AddItemForm.propTypes = {
+  onAdd: PropTypes.func.isRequired,
+};
