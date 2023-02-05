@@ -53,7 +53,10 @@ export default class App extends Component {
 
   addItem = text => {
     const newItem = this.createItem(text);
-
+    if(!newItem.task){return alert('Type the task, please')
+      
+    }
+    console.log(newItem.task);
     this.setState(({ todoData }) => ({
       todoData: [...todoData, newItem],
     }));

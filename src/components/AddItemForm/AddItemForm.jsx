@@ -7,6 +7,9 @@ export default class AddItemForm extends Component {
   };
 
   handleChange = e => {
+    if(e.target.value.length>40){
+      return alert ('task description should not be longer than 40 characters')
+    }
     this.setState({
       task: e.target.value,
     });
@@ -26,7 +29,7 @@ export default class AddItemForm extends Component {
         <input
           type="text"
           className={css.input}
-          placeholder="What needs to be done?"
+          placeholder="Type here the task"
           onChange={this.handleChange}
           value={this.state.task}
         />
