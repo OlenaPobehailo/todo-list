@@ -21,7 +21,7 @@ export default class App extends Component {
   };
 
   componentDidMount() {
-    console.log('componentDidMount');
+    //console.log('componentDidMount');
 
     const todoData = localStorage.getItem('todoData');
     const parsedTodoData = JSON.parse(todoData);
@@ -53,10 +53,10 @@ export default class App extends Component {
 
   addItem = text => {
     const newItem = this.createItem(text);
-    if(!newItem.task){return alert('Type the task, please')
-      
+    if (!newItem.task) {
+      return alert('Type the task, please');
     }
-    console.log(newItem.task);
+    //console.log(newItem.task);
     this.setState(({ todoData }) => ({
       todoData: [...todoData, newItem],
     }));
