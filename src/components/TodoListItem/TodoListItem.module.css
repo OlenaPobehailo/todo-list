@@ -3,8 +3,20 @@
 .todoListItemButton {
   width: 80px;
   height: 50px;
-  margin-left: 3px;
+  margin: 3px;
+  font-size: 16px;
+
+  color: #805a3b;
+  background-color: transparent;
+  border: 1px solid #805a3b;
+  border-radius: 4px;
 }
+
+.todoListItemButton:hover,
+.todoListItemButton:focus {
+  background-color: #fd974f;
+}
+
 
 .todoListItemTask {
   padding: 10px 0 10px 20px;
@@ -21,6 +33,6 @@
 
 .todoListItemTaskImportant {
   composes: todoListItemTask;
-  font-weight: bold;
-  color: tomato;
+  font-weight: 800;
+  color: #c60000;
 }

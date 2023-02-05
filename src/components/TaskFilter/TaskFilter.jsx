@@ -1,5 +1,4 @@
 import css from './TaskFilter.module.css';
-import PropTypes from 'prop-types';
 
 const TaskFilter = ({ status, handleFilterChange }) => {
   return (

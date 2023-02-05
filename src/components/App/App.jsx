@@ -6,6 +6,7 @@ import TodoList from '../TodoList';
 import AddItemForm from '../AddItemForm';
 import SearchPanel from '../SearchPanel';
 import TaskFilter from '../TaskFilter';
+import css from './App.module.css';
 
 export default class App extends Component {
   state = {
@@ -87,7 +88,7 @@ export default class App extends Component {
   }
 
   render() {
-    const { todoData, query, status } = this.state;
+    const { todoData, query } = this.state;
 
     const completedQuantity = todoData.filter(el => el.completed).length;
     const todoQuantity = todoData.length - completedQuantity;
@@ -100,9 +101,9 @@ export default class App extends Component {
     );
 
     return (
-      <div className="todo-app">
+      <div className={css.todoApp}>
         <AppHeader todo={todoQuantity} completed={completedQuantity} />
-        
+
         <div className="top-panel">
           <SearchPanel onSearchChange={this.handleSearch} />
           <TaskFilter status={this.state.status} handleFilterChange={this.handleFilterChange} />

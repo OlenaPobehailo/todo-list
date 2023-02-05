@@ -1,6 +1,13 @@
 import css from './TodoListItem.module.css';
 
-const TodoListItem = ({ task, onDelete, onToggleImportant, onToggleCompleted, important, completed }) => {
+const TodoListItem = ({
+  task,
+  onDelete,
+  onToggleImportant,
+  onToggleCompleted,
+  important,
+  completed,
+}) => {
   return (
     <>
       <span
@@ -13,10 +20,10 @@ const TodoListItem = ({ task, onDelete, onToggleImportant, onToggleCompleted, im
       </span>
       <div>
         <button className={css.todoListItemButton} type="button" onClick={onDelete}>
-          delete
+          Delete
         </button>
         <button className={css.todoListItemButton} type="button" onClick={onToggleImportant}>
-          important
+          Important
         </button>
       </div>
     </>

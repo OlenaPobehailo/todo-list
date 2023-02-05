@@ -7,6 +7,8 @@
 body {
     font-family: sans-serif;
     line-height: 1.5;
+
+    color: #805a3b
 }
 
 h1,
@@ -31,14 +33,3 @@ img {
     height: auto;
 }
 
-/* =================================== */
-.todo-app {
-    margin: 2rem auto 0 auto;
-    max-width: 600px;
-}
-
-.top-panel {
-    margin: 1rem 0;
-    display: flex;
-    justify-content: space-between;
-}
