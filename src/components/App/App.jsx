@@ -5,7 +5,7 @@ import AppHeader from '../AppHeader';
 import TodoList from '../TodoList';
 import AddItemForm from '../AddItemForm';
 import SearchPanel from '../SearchPanel';
-// import TaskFilter from '../TaskFilter';
+import TaskFilter from '../TaskFilter';
 
 export default class App extends Component {
   state = {
@@ -92,53 +92,19 @@ export default class App extends Component {
     const completedQuantity = todoData.filter(el => el.completed).length;
     const todoQuantity = todoData.length - completedQuantity;
 
-    const filteredTodo= this.handleTaskFilter();
-
+    const filteredTodo = this.handleTaskFilter();
 
     const normalizedQuery = query.toLocaleLowerCase();
-    const searchedItems = filteredTodo.filter(el => el.task.toLowerCase().includes(normalizedQuery));
-
+    const searchedItems = filteredTodo.filter(el =>
+      el.task.toLowerCase().includes(normalizedQuery)
+    );
 
     return (
       <div className="todo-app">
         <AppHeader todo={todoQuantity} completed={completedQuantity} />
         <div className="top-panel">
           <SearchPanel onSearchChange={this.handleSearch} />
-          {/* <TaskFilter /> */}
-
-          <div>
-            <div>
-              <input
-                type="radio"
-                id="radio1"
-                name="radio"
-                value="all"
-                checked={status === 'all'}
-                onChange={this.handleFilterChange}
-              />
-              <label htmlFor="radio1">all</label>
-
-              <input
-                type="radio"
-                id="radio2"
-                name="radio"
-                value="active"
-                checked={status === 'active'}
-                onChange={this.handleFilterChange}
-              />
-              <label htmlFor="radio2">active</label>
-
-              <input
-                type="radio"
-                id="radio3"
-                name="radio"
-                value="completed"
-                checked={status === 'completed'}
-                onChange={this.handleFilterChange}
-              />
-              <label htmlFor="radio3">completed</label>
-            </div>
-          </div>
+          <TaskFilter status={this.state.status} handleFilterChange={this.handleFilterChange} />
         </div>
 
         <AddItemForm onAdd={this.addItem} />
