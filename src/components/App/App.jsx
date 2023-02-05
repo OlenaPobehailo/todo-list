@@ -2,10 +2,10 @@ import { Component } from 'react';
 import { nanoid } from 'nanoid';
 
 import AppHeader from '../AppHeader';
-import SearchPanel from '../SearchPanel';
 import TodoList from '../TodoList';
-import Filter from '../Filter';
 import AddItemForm from '../AddItemForm';
+import SearchPanel from '../SearchPanel';
+// import TaskFilter from '../TaskFilter';
 
 export default class App extends Component {
   state = {
@@ -16,7 +16,7 @@ export default class App extends Component {
     ],
 
     query: '',
-    filter: 'active', // all, active, completed
+    status: 'all', // all, active, completed
   };
 
   createItem(task) {
@@ -66,36 +66,81 @@ export default class App extends Component {
     });
   };
 
-  // handleFilter(items, filter) {
-  //   switch (filter) {
-  //     case 'all':
-  //       return items;
-  //     case 'active':
-  //       return items.filter(item => !item.completed);
-  //     case 'completed':
-  //       return items.filter(item => item.completed);
-  //     default:
-  //       return items;
-  //   }
-  // }
+  handleFilterChange = e => {
+    this.setState({
+      status: e.target.value,
+    });
+  };
+
+  handleTaskFilter() {
+    const { status, todoData } = this.state;
+    switch (status) {
+      case 'all':
+        return todoData;
+      case 'active':
+        return todoData.filter(item => !item.completed);
+      case 'completed':
+        return todoData.filter(item => item.completed);
+      default:
+        return todoData;
+    }
+  }
 
   render() {
-    const { todoData, query, filter } = this.state;
+    const { todoData, query, status } = this.state;
 
     const completedQuantity = todoData.filter(el => el.completed).length;
     const todoQuantity = todoData.length - completedQuantity;
 
+    const filteredTodo= this.handleTaskFilter();
+
+
     const normalizedQuery = query.toLocaleLowerCase();
-    const searchedItems = todoData.filter(el => el.task.toLowerCase().includes(normalizedQuery));
-    
+    const searchedItems = filteredTodo.filter(el => el.task.toLowerCase().includes(normalizedQuery));
+
 
     return (
       <div className="todo-app">
         <AppHeader todo={todoQuantity} completed={completedQuantity} />
         <div className="top-panel">
           <SearchPanel onSearchChange={this.handleSearch} />
-          <Filter />
+          {/* <TaskFilter /> */}
+
+          <div>
+            <div>
+              <input
+                type="radio"
+                id="radio1"
+                name="radio"
+                value="all"
+                checked={status === 'all'}
+                onChange={this.handleFilterChange}
+              />
+              <label htmlFor="radio1">all</label>
+
+              <input
+                type="radio"
+                id="radio2"
+                name="radio"
+                value="active"
+                checked={status === 'active'}
+                onChange={this.handleFilterChange}
+              />
+              <label htmlFor="radio2">active</label>
+
+              <input
+                type="radio"
+                id="radio3"
+                name="radio"
+                value="completed"
+                checked={status === 'completed'}
+                onChange={this.handleFilterChange}
+              />
+              <label htmlFor="radio3">completed</label>
+            </div>
+          </div>
         </div>
+
         <AddItemForm onAdd={this.addItem} />
 
         <TodoList

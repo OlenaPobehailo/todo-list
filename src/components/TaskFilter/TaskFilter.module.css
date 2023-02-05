@@ -1,0 +1,41 @@
+.taskFilter {
+    /* display: flex; */
+    /* margin-left: auto; */
+    font-size: 14px;
+    color: #333;
+    display: inline-block;
+    letter-spacing: 0.5px;
+}
+
+.radioToolbar input[type="radio"] {
+    display: none;
+}
+
+.radioToolbar label {
+    display: inline-block;
+    margin-left: 5px;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-radius: 2px;
+    border: 1px solid lightgrey;
+
+}
+
+.radioToolbar input:checked+label,
+.radioToolbar label:hover {
+    background-color: #b7e6ff;
+    border: 1px solid #87cff6;
+}
+
+
+
+
+.filterButton {
+    min-width: 100px;
+    margin-left: 2px;
+}
+
+.activeButton {
+    composes: filterButton;
+    background-color: lightblue;
+}
