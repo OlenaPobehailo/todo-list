@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { useEffect, useState } from 'react';
 import { nanoid } from 'nanoid';
 
 import AppHeader from '../AppHeader';
@@ -8,93 +8,64 @@ import SearchPanel from '../SearchPanel';
 import TaskFilter from '../TaskFilter';
 import css from './App.module.css';
 
-export default class App extends Component {
-  state = {
-    todoData: [this.createItem('task 1'), this.createItem('task 2'), this.createItem('Task 3')],
+const INITIAL_TASKS = [
+  { task: 'task 1', important: false, completed: false, id: nanoid() },
+  { task: 'task 2', important: false, completed: false, id: nanoid() },
+  { task: 'task 3', important: false, completed: false, id: nanoid() },
+];
 
-    query: '',
-    status: 'all', // all, active, completed
-  };
+export default function App() {
+  const [todoData, setTodoData] = useState(() => {
+    const localData = JSON.parse(window.localStorage.getItem('todoData'));
+    return localData && localData.length ? localData : INITIAL_TASKS;
+  });
+  const [query, setQuery] = useState('');
+  const [status, setStatus] = useState('');
 
-  componentDidMount() {
-    //console.log('componentDidMount');
+  useEffect(() => {
+    window.localStorage.setItem('todoData', JSON.stringify(todoData));
+  }, [todoData]);
 
-    const todoData = localStorage.getItem('todoData');
-    const parsedTodoData = JSON.parse(todoData);
-
-    if (parsedTodoData) {
-      this.setState({ todoData: parsedTodoData });
-    }
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    // console.log('componentDidUpdate');
-    // console.log(prevState);
-    // console.log(this.state);
-
-    if (this.state.todoData !== prevState.todoData) {
-      localStorage.setItem('todoData', JSON.stringify(this.state.todoData));
-    }
-  }
-
-  createItem(task) {
+  const createItem = task => {
     return { task, important: false, completed: false, id: nanoid() };
-  }
-
-  deleteItem = id => {
-    this.setState(({ todoData }) => ({
-      todoData: todoData.filter(el => el.id !== id),
-    }));
   };
 
-  addItem = text => {
-    const newItem = this.createItem(text);
+  const deleteItem = id => {
+    setTodoData(todoData.filter(el => el.id !== id));
+  };
+
+  const addItem = text => {
+    const newItem = createItem(text);
     if (!newItem.task) {
       return alert('Type the task, please');
     }
-    //console.log(newItem.task);
-    this.setState(({ todoData }) => ({
-      todoData: [...todoData, newItem],
-    }));
+    setTodoData([...todoData, newItem]);
   };
 
-  onToggleImportant = id => {
-    this.setState(({ todoData }) => {
-      return {
-        todoData: this.toggleProperty(todoData, id, 'important'),
-      };
-    });
+  const onToggleImportant = id => {
+    setTodoData(toggleProperty(todoData, id, 'important'));
   };
 
-  onToggleCompleted = id => {
-    this.setState(({ todoData }) => {
-      return {
-        todoData: this.toggleProperty(todoData, id, 'completed'),
-      };
-    });
+  const onToggleCompleted = id => {
+    setTodoData(toggleProperty(todoData, id, 'completed'));
   };
 
-  toggleProperty(arr, id, name) {
+  const toggleProperty = (arr, id, name) => {
     const idx = arr.findIndex(el => el.id === id);
     const prev = arr[idx];
     const current = { ...prev, [name]: !prev[name] };
     return [...arr.slice(0, idx), current, ...arr.slice(idx + 1)];
-  }
-
-  handleSearch = e => {
-    this.setState({
-      query: e.target.value,
-    });
   };
 
-  handleFilterChange = e => {
-    this.setState({
-      status: e.target.value,
-    });
+  const handleSearch = e => {
+    setQuery(e.target.value);
   };
 
-  handleTaskFilter() {
-    const { status, todoData } = this.state;
+  const handleFilterChange = e => {
+    setStatus(e.target.value);
+  };
+
+  const handleTaskFilter = () => {
     switch (status) {
       case 'all':
         return todoData;
@@ -105,39 +76,31 @@ export default class App extends Component {
       default:
         return todoData;
     }
-  }
+  };
 
-  render() {
-    const { todoData, query } = this.state;
+  const completedQuantity = todoData.filter(el => el.completed).length;
+  const todoQuantity = todoData.length - completedQuantity;
+  const filteredTodo = handleTaskFilter();
+  const normalizedQuery = query.toLocaleLowerCase();
+  const searchedItems = filteredTodo.filter(el => el.task.toLowerCase().includes(normalizedQuery));
 
-    const completedQuantity = todoData.filter(el => el.completed).length;
-    const todoQuantity = todoData.length - completedQuantity;
+  return (
+    <div className={css.todoApp}>
+      <AppHeader todo={todoQuantity} completed={completedQuantity} />
 
-    const filteredTodo = this.handleTaskFilter();
-
-    const normalizedQuery = query.toLocaleLowerCase();
-    const searchedItems = filteredTodo.filter(el =>
-      el.task.toLowerCase().includes(normalizedQuery)
-    );
-
-    return (
-      <div className={css.todoApp}>
-        <AppHeader todo={todoQuantity} completed={completedQuantity} />
-
-        <div className="top-panel">
-          <SearchPanel onSearchChange={this.handleSearch} />
-          <TaskFilter status={this.state.status} handleFilterChange={this.handleFilterChange} />
-        </div>
-
-        <AddItemForm onAdd={this.addItem} />
-
-        <TodoList
-          todos={searchedItems}
-          onDelete={this.deleteItem}
-          onToggleImportant={this.onToggleImportant}
-          onToggleCompleted={this.onToggleCompleted}
-        />
+      <div className="top-panel">
+        <SearchPanel onSearchChange={handleSearch} />
+        <TaskFilter status={status} handleFilterChange={handleFilterChange} />
       </div>
-    );
-  }
+
+      <AddItemForm onAdd={addItem} />
+
+      <TodoList
+        todos={searchedItems}
+        onDelete={deleteItem}
+        onToggleImportant={onToggleImportant}
+        onToggleCompleted={onToggleCompleted}
+      />
+    </div>
+  );
 }
