@@ -14,14 +14,7 @@ const TodoList = () => {
 
   const todos = useSelector(state => state.todo.todoItems);
 
-  const filteredTodos = todos.filter(item => {
-    return (
-      item.label.toLowerCase().includes(filter.toLowerCase()) && // додаємо умову фільтрації за значенням радіо-кнопки
-      (status === 'all' ||
-        (status === 'active' && !item.completed) ||
-        (status === 'completed' && item.completed))
-    );
-  });
+  const filteredTodos = filterTodo(todos, filter, status);
 
   const onDelete = id => {
     dispatch(deleteItem(id));
@@ -56,3 +49,13 @@ const TodoList = () => {
 };
 
 export default TodoList;
+
+const filterTodo = (todos, filter, status) => {
+  return todos.filter(
+    item =>
+      item.label.toLowerCase().includes(filter.toLowerCase()) && // додаємо умову фільтрації за значенням радіо-кнопки
+      (status === 'all' ||
+        (status === 'active' && !item.completed) ||
+        (status === 'completed' && item.completed))
+  );
+};

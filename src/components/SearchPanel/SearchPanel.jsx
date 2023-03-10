@@ -14,6 +14,8 @@ const SearchPanel = () => {
       className={css.searchInput}
       placeholder="Type here to search"
       onChange={handleFilterChange}
+      aria-label="Search tasks"
+      name="search"
     />
   );
 };
