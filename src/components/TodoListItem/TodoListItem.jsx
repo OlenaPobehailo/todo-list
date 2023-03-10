@@ -1,7 +1,7 @@
 import css from './TodoListItem.module.css';
 
 const TodoListItem = ({
-  task,
+  label,
   onDelete,
   onToggleImportant,
   onToggleCompleted,
@@ -16,7 +16,7 @@ const TodoListItem = ({
         }`}
         onClick={onToggleCompleted}
       >
-        {task}
+        {label}
       </span>
       <div>
         <button className={css.todoListItemButton} type="button" onClick={onDelete}>

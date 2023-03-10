@@ -1,6 +1,16 @@
+import { useDispatch } from 'react-redux';
+import { setStatus } from '../../redux/statusSlice';
 import css from './TaskFilter.module.css';
 
-const TaskFilter = ({ status, handleFilterChange }) => {
+const TaskFilter = () => {
+
+  const dispatch = useDispatch();
+
+  const handleStatusChange = e => {
+    dispatch(setStatus(e.target.value)); 
+  };
+
+
   return (
     <div className={css.taskFilter}>
       <div className={css.radioToolbar}>
@@ -9,8 +19,8 @@ const TaskFilter = ({ status, handleFilterChange }) => {
           id="radio1"
           name="radio"
           value="all"
-          checked={status === 'all'}
-          onChange={handleFilterChange}
+          // checked={status === 'all'}
+          onChange={handleStatusChange} 
         />
         <label htmlFor="radio1">all</label>
 
@@ -19,8 +29,8 @@ const TaskFilter = ({ status, handleFilterChange }) => {
           id="radio2"
           name="radio"
           value="active"
-          checked={status === 'active'}
-          onChange={handleFilterChange}
+          // checked={status === 'active'}
+          onChange={handleStatusChange} 
         />
         <label htmlFor="radio2">active</label>
 
@@ -29,8 +39,8 @@ const TaskFilter = ({ status, handleFilterChange }) => {
           id="radio3"
           name="radio"
           value="completed"
-          checked={status === 'completed'}
-          onChange={handleFilterChange}
+          // checked={status === 'completed'}
+          onChange={handleStatusChange} 
         />
         <label htmlFor="radio3">completed</label>
       </div>

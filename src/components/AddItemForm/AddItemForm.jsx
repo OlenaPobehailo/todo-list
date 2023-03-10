@@ -1,38 +1,43 @@
+import { nanoid } from 'nanoid';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addItem } from '../../redux/todoSlice';
 import css from './AddItemForm.module.css';
-import PropTypes from 'prop-types';
 
-const AddItemForm = ({ onAdd }) => {
-  const [task, setTask] = useState('');
+const AddItemForm = () => {
+  const dispatch = useDispatch();
+  const [text, setText] = useState('');
 
   const handleChange = e => {
     if (e.target.value.length > 40) {
       return alert('task description should not be longer than 40 characters');
     }
-    setTask(e.target.value);
+    setText(e.target.value);
+    console.log(e.target.value);
   };
 
-  const onFormSubmit = e => {
+  const handleFormSubmit = e => {
     e.preventDefault();
-    onAdd(task);
-    setTask('');
+    const newItem = {
+      id: nanoid(),
+      label: text,
+    };
+    dispatch(addItem(newItem));
+    setText('');
   };
 
   return (
-    <form className={css.addItemForm} onSubmit={onFormSubmit}>
+    <form className={css.addItemForm} onSubmit={handleFormSubmit}>
       <input
         type="text"
         className={css.input}
         placeholder="Type here the task"
         onChange={handleChange}
-        value={task}
+        value={text}
       />
       <button>Add</button>
     </form>
   );
 };
-export default AddItemForm;
 
-AddItemForm.propTypes = {
-  onAdd: PropTypes.func.isRequired,
-};
+export default AddItemForm;

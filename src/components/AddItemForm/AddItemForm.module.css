@@ -1,27 +1,58 @@
 .addItemForm {
-    display: flex;
-    margin-top: 10px;
-    margin-bottom: 10px;
+  display: flex;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .addItemForm button {
-    display: inline-block;
-    width: 120px;
-    height: 46px;
-    margin-left: 2px;
-    font-size: 18px;
-    color: #805a3b;
-    background-color: transparent;
-    border: 1px solid #805a3b
+  display: inline-block;
+  width: 120px;
+  height: 46px;
+  margin-left: 2px;
+  font-size: 18px;
+  color: #805a3b;
+  background-color: transparent;
+  border: 1px solid #805a3b;
 }
 
 .addItemForm button:hover {
-    background-color: #fd974f;
+  background-color: #fd974f;
 }
 
 .addItemForm input {
-    height: 40px;
-    width: 550px;
-    font-size: 16px;
-
+  height: 40px;
+  width: 550px;
+  font-size: 16px;
 }
+
+/*
+.form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.input {
+  width: 100%;
+  padding: 8px;
+  margin-right: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.button {
+  background-color: #008CBA;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #0077b3;
+}
+
+
+*/

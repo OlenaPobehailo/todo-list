@@ -1,19 +1,52 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { selectFilter } from '../../redux/filterSlice';
+import { selectStatus } from '../../redux/statusSlice';
+
+import { deleteItem, toggleCompleted, toggleImportant } from '../../redux/todoSlice';
 import TodoListItem from '../TodoListItem/TodoListItem';
 import css from './TodoList.module.css';
 
-const TodoList = ({ todos, onDelete, onToggleCompleted, onToggleImportant }) => {
+const TodoList = () => {
+  const dispatch = useDispatch();
+
+  const filter = useSelector(selectFilter);
+  const status = useSelector(selectStatus);
+
+  const todos = useSelector(state => state.todo.todoItems);
+
+  const filteredTodos = todos.filter(item => {
+    return (
+      item.label.toLowerCase().includes(filter.toLowerCase()) && // додаємо умову фільтрації за значенням радіо-кнопки
+      (status === 'all' ||
+        (status === 'active' && !item.completed) ||
+        (status === 'completed' && item.completed))
+    );
+  });
+
+  const onDelete = id => {
+    dispatch(deleteItem(id));
+  };
+
+  const onToggleImportant = id => {
+    dispatch(toggleImportant(id));
+  };
+
+  const onToggleCompleted = id => {
+    dispatch(toggleCompleted(id));
+  };
+
   return (
     <ul>
-      {todos.map(item => {
-        const { id, ...restProps } = item;
-
+      {filteredTodos.map(item => {
         return (
-          <li key={id} className={css.listItem}>
+          <li key={item.id} className={css.listItem}>
             <TodoListItem
-              {...restProps}
-              onDelete={() => onDelete(id)}
-              onToggleImportant={() => onToggleImportant(id)}
-              onToggleCompleted={() => onToggleCompleted(id)}
+              label={item.label}
+              onDelete={() => onDelete(item.id)}
+              onToggleImportant={() => onToggleImportant(item.id)}
+              onToggleCompleted={() => onToggleCompleted(item.id)}
+              important={item.important}
+              completed={item.completed}
             />
           </li>
         );
