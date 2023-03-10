@@ -1,43 +1,37 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import css from './AddItemForm.module.css';
 import PropTypes from 'prop-types';
-export default class AddItemForm extends Component {
-  state = {
-    task: '',
-  };
 
-  handleChange = e => {
-    if(e.target.value.length>40){
-      return alert ('task description should not be longer than 40 characters')
+const AddItemForm = ({ onAdd }) => {
+  const [task, setTask] = useState('');
+
+  const handleChange = e => {
+    if (e.target.value.length > 40) {
+      return alert('task description should not be longer than 40 characters');
     }
-    this.setState({
-      task: e.target.value,
-    });
+    setTask(e.target.value);
   };
 
-  onFormSubmit = e => {
+  const onFormSubmit = e => {
     e.preventDefault();
-    this.props.onAdd(this.state.task);
-    this.setState({
-      task: '',
-    });
+    onAdd(task);
+    setTask('');
   };
 
-  render() {
-    return (
-      <form className={css.addItemForm} onSubmit={this.onFormSubmit}>
-        <input
-          type="text"
-          className={css.input}
-          placeholder="Type here the task"
-          onChange={this.handleChange}
-          value={this.state.task}
-        />
-        <button>Add</button>
-      </form>
-    );
-  }
-}
+  return (
+    <form className={css.addItemForm} onSubmit={onFormSubmit}>
+      <input
+        type="text"
+        className={css.input}
+        placeholder="Type here the task"
+        onChange={handleChange}
+        value={task}
+      />
+      <button>Add</button>
+    </form>
+  );
+};
+export default AddItemForm;
 
 AddItemForm.propTypes = {
   onAdd: PropTypes.func.isRequired,
