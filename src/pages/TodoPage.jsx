@@ -6,6 +6,7 @@ import SearchPanel from '../components/SearchPanel';
 import TaskFilter from '../components/TaskFilter';
 import TodoList from '../components/TodoList';
 import { useLogOutRedirect } from '../hooks/useLogOutRedirect';
+import css from './TodoPage.module.css';
 
 export const TodoPage = () => {
   useLogOutRedirect();
@@ -13,16 +14,13 @@ export const TodoPage = () => {
   const todoItems = useSelector(state => state.todo.todoItems);
 
   return (
-    <div>
+    <div className={css.container}>
       <AppHeader />
-
-      <div className="top-panel">
+      <div className={css.filter}>
         <SearchPanel />
         <TaskFilter />
       </div>
-
       <AddItemForm />
-
       <TodoList todos={todoItems} />
     </div>
   );

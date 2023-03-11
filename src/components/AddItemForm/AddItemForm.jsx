@@ -2,7 +2,7 @@ import { nanoid } from 'nanoid';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addItem } from '../../redux/todoSlice';
-import checkTextLength from '../../utilits/checkTextLength';
+import checkTextLength from '../../utils/checkTextLength';
 import css from './AddItemForm.module.css';
 
 const AddItemForm = () => {

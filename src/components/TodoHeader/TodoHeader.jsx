@@ -7,7 +7,7 @@ const AppHeader = () => {
   const completedItems = useSelector(selectCompletedItems);
 
   return (
-    <div className={css.appHeader}>
+    <div className={css.todoHeader}>
       <h1>Todo List</h1>
       <h2>
         {todoItems.length} to do, {completedItems.length} completed

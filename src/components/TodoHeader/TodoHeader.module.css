@@ -1,12 +1,14 @@
-.appHeader {
+.todoHeader {
   display: flex;
   align-items: flex-end;
+  margin-bottom: 10px;
 }
 
-.appHeader h1 {
+.todoHeader h1 {
   flex-grow: 1;
+
 }
 
-.appHeader h2 {
+.todoHeader h2 {
   font-size: 1.2rem;
 }
