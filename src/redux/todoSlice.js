@@ -33,6 +33,10 @@ const todoSlice = createSlice({
     },
 });
 
+export const selectTodoItems = state => state.todo.todoItems.filter(item => !item.completed);
+
+export const selectCompletedItems = state => state.todo.todoItems.filter(item => item.completed);
+
 export const { addItem, deleteItem, toggleCompleted, toggleImportant } = todoSlice.actions;
 
 export default todoSlice.reducer;
