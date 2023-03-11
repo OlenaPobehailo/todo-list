@@ -1,0 +1,10 @@
+.todoApp {
+  max-width: 680px;
+  min-height: 500px;
+  margin: 50px auto;
+  padding: 20px 0;
+  background-color: #fef2e4;
+  border: 1px solid rgb(128, 90, 59);
+  -webkit-box-shadow: 5px 5px 12px -6px rgb(128, 90, 59, 0.8);
+  box-shadow: 5px 5px 12px -6px rgb(128, 90, 59, 0.8);
+}

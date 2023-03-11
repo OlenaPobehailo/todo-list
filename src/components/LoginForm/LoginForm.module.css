@@ -1,0 +1,17 @@
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  min-height: 300px;
+}
+
+.input {
+  height: 30px;
+}
+
+.button {
+  min-width: 150px;
+  height: 34px;
+  font-size: 18px;
+}

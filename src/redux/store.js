@@ -14,6 +14,7 @@ import storage from 'redux-persist/es/storage';
 import todoReducer from './todoSlice';
 import filterReducer from './filterSlice';
 import statusReducer from './statusSlice';
+import userReducer from './userSlice';
 
 const persistConfig = {
     key: 'root',
@@ -28,7 +29,8 @@ export const store = configureStore({
     reducer: {
         todo: persistedReducer,
         filter: filterReducer,
-        status: statusReducer
+        status: statusReducer,
+        user: userReducer,
     },
 
     middleware: (getDefaultMiddleware) =>

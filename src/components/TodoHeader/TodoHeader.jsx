@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { selectCompletedItems, selectTodoItems } from '../../redux/todoSlice';
-import css from './AppHeader.module.css';
+import css from './TodoHeader.module.css';
 
 const AppHeader = () => {
   const todoItems = useSelector(selectTodoItems);
